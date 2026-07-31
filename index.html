@@ -2155,7 +2155,7 @@
       .wa-chat-window { width: 290px; bottom: 65px; left: 0; }
 
       /* Hero Mobile & Contrast */
-      #hero { padding: 85px 0 35px; min-height: auto; overflow: hidden; }
+      #hero { padding: 65px 0 15px; min-height: auto; overflow: hidden; }
       .hero-bg-photo { object-position: 80% 42%; width: 100%; }
       .hero-bg-overlay {
         background:
@@ -2170,7 +2170,7 @@
             transparent 30%
           );
       }
-      .hero-lux-inner { padding: 75px 0 15px; }
+      .hero-lux-inner { padding: 55px 0 10px; }
       .hero-lux-pretitle span {
         font-weight: 500;
         color: rgba(255, 255, 255, 0.9);
@@ -2188,7 +2188,7 @@
         color: var(--cyan);
         text-shadow: 0 2px 10px rgba(0,0,0,0.95);
       }
-      .hero-lux-tags { flex-wrap: wrap; gap: 4px 6px; margin-bottom: 1.2rem; }
+      .hero-lux-tags { flex-wrap: wrap; gap: 4px 6px; margin-bottom: 0.8rem; }
       .hero-lux-tags span {
         font-weight: 500;
         color: rgba(255, 255, 255, 0.9);
@@ -2200,7 +2200,7 @@
         font-weight: 400;
         color: rgba(255, 255, 255, 0.92);
         line-height: 1.55;
-        margin-bottom: 1.2rem;
+        margin-bottom: 0.8rem;
         text-shadow: 0 1px 6px rgba(0,0,0,0.8);
       }
       .btn-hero-primary {
@@ -2210,14 +2210,14 @@
         padding: 12px 18px;
         font-size: 0.7rem;
       }
-      .hero-lux-ctas { margin-bottom: 1.2rem; }
+      .hero-lux-ctas { margin-bottom: 0.8rem; }
       
       /* Stats Ajustados no Mobile */
       .hero-lux-stats {
         display: flex;
         gap: 0.5rem;
         justify-content: space-between;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.2rem;
         flex-wrap: nowrap;
         width: 100%;
       }
@@ -2268,12 +2268,15 @@
       }
 
       .hero-scroll-indicator {
-        margin-top: 1.4rem;
+        margin-top: 0.6rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         text-align: center;
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
       }
       .hero-scroll-indicator span {
         font-size: 0.6rem;
@@ -2525,7 +2528,7 @@
             </div>
 
             <!-- Scroll indicator -->
-            <div class="hero-scroll-indicator reveal delay-4" onclick="document.getElementById('servicos').scrollIntoView({behavior:'smooth'})" aria-hidden="true">
+            <div class="hero-scroll-indicator" onclick="document.getElementById('servicos').scrollIntoView({behavior:'smooth'})" aria-hidden="true">
               <span>Role para descobrir</span>
               <div class="hero-scroll-line"></div>
             </div>
