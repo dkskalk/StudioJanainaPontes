@@ -163,6 +163,143 @@
       .nav-logo-name span { font-size: 0.6rem !important; }
     }
 
+  
+    /* Navbar Base & Scrolled */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: all 0.3s ease;
+      background: rgba(13, 26, 46, 0.95);
+      backdrop-filter: blur(15px);
+    }
+    #navbar.scrolled {
+      background: rgba(19, 32, 57, 0.97);
+      padding: 10px 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img {
+      height: 52px;
+      width: 52px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 194, 203, 0.5);
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+      flex-shrink: 0;
+    }
+    .nav-logo-name {
+      font-family: var(--font-title, 'Outfit', sans-serif);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .nav-logo-name span {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: #00C2CB;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .btn-nav-agendar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 28px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F3C010;
+      background: transparent;
+      border: 1.5px solid #F3C010;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .btn-nav-agendar:hover {
+      background: #F3C010;
+      color: #0d1a2e;
+      box-shadow: 0 4px 20px rgba(243, 192, 16, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger Button */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 1001;
+      position: relative;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #ffffff;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(13, 26, 46, 0.98);
+      backdrop-filter: blur(25px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 110px;
+      padding-bottom: 60px;
+      gap: 1.4rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-title, 'Outfit', sans-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ffffff;
+      transition: color 0.3s ease;
+      text-align: center;
+    }
+    .mobile-menu a:hover { color: #00C2CB; }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .hamburger { display: flex !important; }
+      .nav-logo img { width: 40px !important; height: 40px !important; }
+      .nav-logo-name { font-size: 0.85rem !important; }
+      .nav-logo-name span { font-size: 0.6rem !important; }
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -206,6 +343,19 @@
       <a href="https://wa.me/5521972891926" target="_blank" class="btn-nav-agendar">Agendar</a>
     </div>
   </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu mobile">
+    <a href="index.html#servicos" class="mobile-link">Serviços</a>
+    <a href="blog.html" class="mobile-link">Blog &amp; Artigos</a>
+    <a href="index.html#fundadora" class="mobile-link">Nossa Fundadora</a>
+    <a href="index.html#equipe" class="mobile-link">Equipe</a>
+    <a href="index.html#galeria" class="mobile-link">Galeria</a>
+    <a href="index.html#faq" class="mobile-link">FAQ</a>
+    <a href="index.html#localizacao" class="mobile-link">Localização</a>
+    <a href="https://wa.me/5521972891926" class="btn-nav-agendar" target="_blank" rel="noopener" style="margin-top:10px;">Agendar</a>
+  </div>
+
 
   <!-- Hero Banner -->
   <section class="blog-hero">
@@ -563,6 +713,26 @@
       });
     }
   </script>
+
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburgerBtn.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
