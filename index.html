@@ -88,12 +88,15 @@
        RESET & BASE
     ========================================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; width: 100%; max-width: 100%; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: #F8FAFC;
       color: #162846;
       overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
       line-height: 1.65;
     }
     img { max-width: 100%; display: block; }
@@ -380,6 +383,8 @@
       background: none;
       border: none;
       padding: 4px;
+      z-index: 1001;
+      position: relative;
     }
     .hamburger span {
       display: block;
@@ -387,6 +392,16 @@
       height: 2px;
       background: var(--white);
       transition: all var(--transition);
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     /* Mobile Menu */
@@ -411,15 +426,7 @@
       transition: color var(--transition);
     }
     .mobile-menu a:hover { color: var(--cyan); }
-    .mobile-close {
-      position: absolute;
-      top: 24px; right: 24px;
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 2rem;
-      cursor: pointer;
-    }
+    .mobile-close { display: none !important; }
 
     /* ==========================================
        HERO SECTION — LUXURY EDITORIAL STYLE
@@ -1998,24 +2005,29 @@
        RESPONSIVE — MOBILE
     ========================================== */
     @media (max-width: 768px) {
-      section { padding: 55px 0; }
-      .container { padding: 0 16px; }
+      html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      section { padding: 48px 0; overflow-x: hidden; }
+      .container { padding: 0 16px; width: 100%; box-sizing: border-box; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       
       /* Header & Logo Mobile */
-      .nav-logo img { width: 42px; height: 42px; }
-      .nav-logo-name { font-size: 0.88rem; }
-      .nav-logo-name span { font-size: 0.62rem; }
+      .nav-logo img { width: 40px; height: 40px; }
+      .nav-logo-name { font-size: 0.85rem; }
+      .nav-logo-name span { font-size: 0.6rem; }
 
       /* WhatsApp FAB Floating Button */
       .wa-fab-container { bottom: 16px; left: 16px; }
       .wa-fab { width: 48px; height: 48px; }
       .wa-fab svg { width: 24px; height: 24px; }
-      .wa-chat-window { width: 290px; bottom: 65px; }
+      .wa-chat-window { width: 290px; bottom: 65px; left: 0; }
 
       /* Hero Mobile & Contrast */
-      #hero { padding: 90px 0 50px; min-height: auto; }
+      #hero { padding: 85px 0 35px; min-height: auto; overflow: hidden; }
       .hero-bg-photo { object-position: 80% 42%; width: 100%; }
       .hero-bg-overlay {
         background:
@@ -2030,70 +2042,147 @@
             transparent 30%
           );
       }
+      .hero-lux-inner { padding: 75px 0 15px; }
       .hero-lux-pretitle span {
         font-weight: 700;
         color: #ffffff;
         text-shadow: 0 1px 8px rgba(0,0,0,0.95);
       }
       .hero-lux-title .t-line1 {
-        font-size: clamp(2.2rem, 7.5vw, 3.2rem);
+        font-size: clamp(2rem, 7vw, 2.8rem);
         font-weight: 700;
         color: #ffffff;
         text-shadow: 0 2px 10px rgba(0,0,0,0.95);
       }
       .hero-lux-title .t-line2 {
-        font-size: clamp(2.2rem, 7.5vw, 3.2rem);
+        font-size: clamp(2rem, 7vw, 2.8rem);
         font-weight: 600;
         color: var(--cyan);
         text-shadow: 0 2px 10px rgba(0,0,0,0.95);
       }
+      .hero-lux-tags { flex-wrap: wrap; gap: 4px 6px; margin-bottom: 1.2rem; }
       .hero-lux-tags span {
         font-weight: 700;
         color: #ffffff;
+        font-size: 0.65rem;
         text-shadow: 0 1px 8px rgba(0,0,0,0.95);
       }
       .hero-lux-desc {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         font-weight: 600;
         color: #ffffff;
-        line-height: 1.6;
-        margin-bottom: 2rem;
+        line-height: 1.55;
+        margin-bottom: 1.2rem;
         text-shadow: 0 2px 10px rgba(0,0,0,0.95);
       }
-      .btn-hero-primary, .btn-hero-secondary {
+      .btn-hero-primary {
         width: 100%;
         text-align: center;
         justify-content: center;
-        padding: 12px 20px;
+        padding: 12px 18px;
+        font-size: 0.7rem;
       }
-      .hero-lux-ctas { margin-bottom: 2.5rem; }
-      .hero-stats { gap: 1.2rem; }
-      .hero-stats .stat-number { font-size: 1.8rem; }
-      .hero-stats .stat-label { font-size: 0.72rem; }
+      .hero-lux-ctas { margin-bottom: 1.2rem; }
+      
+      /* Stats Ajustados no Mobile */
+      .hero-lux-stats {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        flex-wrap: nowrap;
+        width: 100%;
+      }
+      .hero-lux-stat {
+        text-align: center;
+        flex: 1;
+        min-width: 0;
+      }
+      .hero-lux-stat .s-num {
+        font-size: 1.4rem !important;
+        font-weight: 800;
+        color: var(--gold);
+        line-height: 1.1;
+      }
+      .hero-lux-stat .s-label {
+        font-size: 0.6rem !important;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.2;
+        color: #ffffff;
+        font-weight: 700;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.95);
+        margin-top: 2px;
+        display: block;
+      }
+
+      .hero-scroll-indicator {
+        bottom: 8px;
+        font-size: 0.6rem;
+      }
+      .hero-scroll-indicator span {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+      }
+
+      /* Unidades / Localização Cards Mobile Fix */
+      #localizacao { padding: 48px 0; overflow: hidden; }
+      .location-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .location-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .location-info {
+        padding: 16px 14px;
+        box-sizing: border-box;
+      }
+      .location-detail {
+        word-break: break-word;
+        font-size: 0.82rem;
+      }
+      .location-detail span {
+        word-break: break-word;
+        font-size: 0.82rem;
+      }
+      .location-cta .btn {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 0.78rem;
+        padding: 10px 12px;
+        white-space: normal;
+        word-break: break-word;
+      }
 
       /* Grids & Cards Mobile */
       .grid-2 { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .service-card .service-body { padding: 18px; }
+      .service-card .service-body { padding: 16px; }
       .units-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .unit-card { padding: 22px; }
+      .unit-card { padding: 18px; width: 100%; box-sizing: border-box; }
       .team-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .journey-steps { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+      .journey-steps { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
       .testimonials-grid { grid-template-columns: 1fr; }
-      .testimonials-stats { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
-      .location-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .testimonials-stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; }
       .footer-bottom { flex-direction: column; text-align: center; }
-      .gallery-slide img { height: 280px; }
+      .gallery-slide img { height: 260px; }
       .faq-two-col { grid-template-columns: 1fr; }
-      .section-title { font-size: 1.65rem; }
+      .section-title { font-size: 1.55rem; }
     }
 
     @media (max-width: 480px) {
-      .hero-lux-title .t-line1, .hero-lux-title .t-line2 { font-size: 2rem; }
+      .hero-lux-title .t-line1, .hero-lux-title .t-line2 { font-size: 1.85rem; }
       .journey-steps { grid-template-columns: 1fr; }
       .testimonials-stats { grid-template-columns: repeat(2, 1fr); }
-      .section-title { font-size: 1.5rem; }
+      .section-title { font-size: 1.45rem; }
     }
 
     /* FAQ dois blocos lado a lado */
@@ -2141,7 +2230,6 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu mobile">
-    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
     <a href="#servicos" class="mobile-link">Serviços</a>
     <a href="#fundadora" class="mobile-link">Nossa Fundadora</a>
     <a href="#equipe" class="mobile-link">Equipe</a>
@@ -2212,13 +2300,6 @@
               >
                 Agendar Avaliação
                 <span class="btn-arrow">→</span>
-              </a>
-              <a
-                href="#servicos"
-                class="btn-hero-ghost"
-                id="cta-hero-servicos"
-              >
-                Nossos Serviços
               </a>
             </div>
 
@@ -3059,14 +3140,18 @@
     // ---- HAMBURGER MENU ----
     const hamburger = document.getElementById('hamburger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileClose = document.getElementById('mobile-close');
 
     hamburger.addEventListener('click', () => {
-      mobileMenu.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      const isOpen = mobileMenu.classList.contains('open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        mobileMenu.classList.add('open');
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
     });
-    mobileClose.addEventListener('click', closeMobileMenu);
 
     document.querySelectorAll('.mobile-link').forEach(link => {
       link.addEventListener('click', closeMobileMenu);
@@ -3074,6 +3159,7 @@
 
     function closeMobileMenu() {
       mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
@@ -3175,9 +3261,9 @@
       waFab.setAttribute('aria-expanded', 'false');
     });
 
-    // ---- AUTO OPEN WIDGET (after 4s) ----
+    // ---- AUTO OPEN WIDGET (after 4s — Desktop apenas) ----
     setTimeout(() => {
-      if (!waChatWindow.classList.contains('open')) {
+      if (!waChatWindow.classList.contains('open') && window.innerWidth > 768) {
         waChatWindow.classList.add('open');
         waFab.setAttribute('aria-expanded', 'true');
         initChat();
