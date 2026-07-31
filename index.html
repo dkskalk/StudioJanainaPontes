@@ -449,20 +449,25 @@
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(13, 26, 46, 0.98);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       z-index: 999;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      justify-content: flex-start;
+      padding-top: 110px;
+      padding-bottom: 60px;
+      gap: 1.4rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .mobile-menu.open { display: flex; }
     .mobile-menu a {
       font-family: var(--font-title);
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--white);
       transition: color var(--transition);
+      text-align: center;
     }
     .mobile-menu a:hover { color: var(--cyan); }
     .mobile-close { display: none !important; }
@@ -2429,23 +2434,14 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu mobile">
-    <a href="#servicos" class="mobile-link" style="font-weight:700;color:var(--cyan);">Serviços</a>
-    <div style="padding-left:16px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
-      <a href="pilates-clinico.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Pilates Clínico &amp; Funcional</a>
-      <a href="fisioterapia-integrativa.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Fisioterapia Integrativa</a>
-      <a href="quiropraxia.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Quiropraxia</a>
-      <a href="massagem-relaxante.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Massagem Relaxante</a>
-      <a href="dancas.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Danças (Ballet/Jazz)</a>
-      <a href="yoga-terapias.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Yoga &amp; Terapias Integrativas</a>
-      <a href="blog.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;color:var(--cyan);">• Ver Todos os Artigos (Blog)</a>
-    </div>
-    <a href="blog.html" class="mobile-link">Blog</a>
+    <a href="#servicos" class="mobile-link">Serviços</a>
+    <a href="blog.html" class="mobile-link">Blog &amp; Artigos</a>
     <a href="#fundadora" class="mobile-link">Nossa Fundadora</a>
     <a href="#equipe" class="mobile-link">Equipe</a>
     <a href="#galeria" class="mobile-link">Galeria</a>
     <a href="#faq" class="mobile-link">FAQ</a>
     <a href="#localizacao" class="mobile-link">Localização</a>
-    <a href="https://wa.me/5521972891926" class="btn btn-primary" target="_blank" rel="noopener">📅 Agendar Agora</a>
+    <a href="https://wa.me/5521972891926" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:10px;">📅 Agendar Avaliação</a>
   </div>
 
   <main>
