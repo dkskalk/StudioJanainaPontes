@@ -1492,50 +1492,70 @@
       margin-top: 1rem;
       margin-bottom: 2rem;
     }
-    .depo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    /* Infinite Marquee Conveyor Belt for Real Social Proof */
+    .depo-marquee-wrap {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 15px 0;
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+    .depo-marquee-track {
+      display: flex;
       gap: 1.5rem;
+      width: max-content;
+      animation: marqueeScroll 50s linear infinite;
+    }
+    .depo-marquee-wrap:hover .depo-marquee-track {
+      animation-play-state: paused;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .depo-card {
+      width: 280px;
+      flex-shrink: 0;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(0, 194, 203, 0.2);
+      border: 1px solid rgba(0, 194, 203, 0.25);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-      transition: all 0.4s ease;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      transition: all 0.35s ease;
       cursor: pointer;
       display: flex;
       flex-direction: column;
     }
     .depo-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: rgba(0, 194, 203, 0.5);
-      box-shadow: 0 20px 50px rgba(0, 194, 203, 0.22);
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(0, 194, 203, 0.6);
+      box-shadow: 0 20px 45px rgba(0, 194, 203, 0.25);
     }
     .depo-card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
-      background: rgba(13, 26, 46, 0.85);
+      padding: 10px 14px;
+      background: rgba(13, 26, 46, 0.9);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .depo-badge {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
+      gap: 5px;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--white);
     }
     .depo-zoom-hint {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--cyan);
       font-weight: 600;
     }
     .depo-img-wrap {
       width: 100%;
+      height: 380px;
       background: #0d1a2e;
       overflow: hidden;
       display: flex;
@@ -1544,14 +1564,14 @@
     }
     .depo-img-wrap img {
       width: 100%;
-      height: auto;
-      max-height: 480px;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
       display: block;
       transition: transform 0.4s ease;
     }
     .depo-card:hover .depo-img-wrap img {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
 
     /* Fullscreen Modal / Lightbox for Testimonial Images */
@@ -2845,135 +2865,193 @@
           </div>
         </div>
 
-        <div class="depo-grid">
-          <!-- Depo 1 -->
-          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo001.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+        <!-- Esteira Infinita de Depoimentos (Marquee Conveyor Belt) -->
+        <div class="depo-marquee-wrap reveal">
+          <div class="depo-marquee-track">
+            <!-- First Set (13 Cards) -->
+            <div class="depo-card" onclick="openDepoModal('Depo001.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo001.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo001.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo002.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo002.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 2 -->
-          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo002.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo003.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo003.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo002.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo004.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo004.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 3 -->
-          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo003.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo005.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo005.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo003.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo006.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo006.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 4 -->
-          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo004.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo007.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo007.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo004.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo008.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo008.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 5 -->
-          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo005.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo009.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo009.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo005.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo010.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo010.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 6 -->
-          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo006.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo011.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo011.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo006.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo012.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo012.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 7 -->
-          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo007.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo013.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo013.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo007.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+
+            <!-- Second Set (Duplicate for Seamless Infinite Loop) -->
+            <div class="depo-card" onclick="openDepoModal('Depo001.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo001.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 8 -->
-          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo008.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo002.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo002.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo008.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo003.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo003.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 9 -->
-          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo009.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo004.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo004.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo009.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo005.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo005.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 10 -->
-          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo010.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo006.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo006.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo010.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo007.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo007.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 11 -->
-          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo011.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo008.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo008.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo011.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo009.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo009.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 12 -->
-          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo012.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo010.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo010.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo012.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo011.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo011.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-          </div>
-          <!-- Depo 13 -->
-          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo013.jpg')">
-            <div class="depo-card-header">
-              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
-              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            <div class="depo-card" onclick="openDepoModal('Depo012.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo012.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
-            <div class="depo-img-wrap">
-              <img src="Depo013.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            <div class="depo-card" onclick="openDepoModal('Depo013.jpg')">
+              <div class="depo-card-header">
+                <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+                <span class="depo-zoom-hint">🔍 Ampliar</span>
+              </div>
+              <div class="depo-img-wrap"><img src="Depo013.jpg" alt="Depoimento real Studio Janaína Portes" loading="lazy"></div>
             </div>
           </div>
         </div>
