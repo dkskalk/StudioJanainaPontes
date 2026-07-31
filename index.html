@@ -452,14 +452,14 @@
       background:
         linear-gradient(to right,
           #080f1a 0%,
-          #080f1a 28%,
-          rgba(8,15,26,0.88) 45%,
-          rgba(8,15,26,0.45) 70%,
-          rgba(8,15,26,0.15) 100%
+          #080f1a 18%,
+          rgba(8,15,26,0.65) 35%,
+          rgba(8,15,26,0.12) 55%,
+          transparent 75%
         ),
         linear-gradient(to top,
-          rgba(8,15,26,0.9) 0%,
-          transparent 40%
+          rgba(8,15,26,0.5) 0%,
+          transparent 25%
         );
       pointer-events: none;
     }
@@ -526,7 +526,7 @@
       font-size: clamp(2.8rem, 5.5vw, 5.2rem);
       font-weight: 400;
       font-style: italic;
-      color: var(--gold);
+      color: var(--cyan);
       letter-spacing: -0.01em;
     }
 
@@ -1358,51 +1358,90 @@
     .team-card.founder-card .team-photo-wrap { height: 340px; }
 
     /* ==========================================
-       GALLERY
+       GALLERY — CAROUSEL
     ========================================== */
     #galeria {
       background: var(--offwhite2);
       padding: 90px 0;
     }
-    .gallery-masonry {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto;
-      gap: 1.25rem;
-    }
-    .gallery-item {
-      border-radius: var(--radius-md);
-      overflow: hidden;
+    .gallery-carousel-wrap {
       position: relative;
-      cursor: pointer;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 60px rgba(13,26,46,0.18);
     }
-    .gallery-item.tall { grid-row: span 2; }
-    .gallery-item.wide { grid-column: span 2; }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      min-height: 220px;
-      transition: transform 0.5s ease;
-    }
-    .gallery-item .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(13,26,46,0.8), transparent 50%);
-      opacity: 0;
-      transition: opacity var(--transition);
+    .gallery-carousel-track {
       display: flex;
-      align-items: flex-end;
-      padding: 20px;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .gallery-item .overlay span {
+    .gallery-slide {
+      min-width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-slide img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+      transition: transform 6s ease;
+    }
+    .gallery-slide-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(13,26,46,0.75), transparent 55%);
+      padding: 32px 36px;
+    }
+    .gallery-slide-label {
       font-family: var(--font-title);
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--white);
+      letter-spacing: 0.04em;
     }
-    .gallery-item:hover img { transform: scale(1.06); }
-    .gallery-item:hover .overlay { opacity: 1; }
+    /* Dots */
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1.4rem;
+    }
+    .gallery-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(22,40,70,0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+    .gallery-dot.active {
+      width: 24px;
+      border-radius: 4px;
+      background: var(--cyan);
+    }
+    /* Arrows */
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(13,26,46,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: var(--white);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      z-index: 5;
+      transition: all var(--transition);
+      backdrop-filter: blur(8px);
+    }
+    .gallery-arrow:hover { background: var(--cyan); border-color: var(--cyan); }
+    .gallery-arrow.prev { left: 16px; }
+    .gallery-arrow.next { right: 16px; }
 
     /* ==========================================
        TESTIMONIALS
@@ -1938,57 +1977,134 @@
     /* ==========================================
        RESPONSIVE — TABLET
     ========================================== */
+    /* ==========================================
+       RESPONSIVE — TABLET
+    ========================================== */
     @media (max-width: 1024px) {
       .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .team-grid { grid-template-columns: repeat(2, 1fr); }
       .journey-steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
       .journey-line { display: none; }
-      .gallery-masonry { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item.wide { grid-column: span 1; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
       .testimonials-stats { grid-template-columns: repeat(2, 1fr); }
       .founder-grid { grid-template-columns: 1fr; }
       .founder-photo-inner img { height: 420px; }
+      .gallery-slide img { height: 380px; }
+      .faq-two-col { grid-template-columns: 1fr; }
     }
 
     /* ==========================================
        RESPONSIVE — MOBILE
     ========================================== */
     @media (max-width: 768px) {
-      section { padding: 70px 0; }
-      .container { padding: 0 18px; }
+      section { padding: 55px 0; }
+      .container { padding: 0 16px; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
-      #hero { padding: 100px 0 60px; min-height: auto; }
+      
+      /* Header & Logo Mobile */
+      .nav-logo img { width: 42px; height: 42px; }
+      .nav-logo-name { font-size: 0.88rem; }
+      .nav-logo-name span { font-size: 0.62rem; }
+
+      /* WhatsApp FAB Floating Button */
+      .wa-fab-container { bottom: 16px; left: 16px; }
+      .wa-fab { width: 48px; height: 48px; }
+      .wa-fab svg { width: 24px; height: 24px; }
+      .wa-chat-window { width: 290px; bottom: 65px; }
+
+      /* Hero Mobile & Contrast */
+      #hero { padding: 90px 0 50px; min-height: auto; }
+      .hero-bg-photo { object-position: 80% 42%; width: 100%; }
+      .hero-bg-overlay {
+        background:
+          linear-gradient(to right,
+            rgba(8,15,26,0.85) 0%,
+            rgba(8,15,26,0.45) 35%,
+            rgba(8,15,26,0.1) 60%,
+            transparent 85%
+          ),
+          linear-gradient(to top,
+            rgba(8,15,26,0.6) 0%,
+            transparent 30%
+          );
+      }
+      .hero-lux-pretitle span {
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 1px 8px rgba(0,0,0,0.95);
+      }
+      .hero-lux-title .t-line1 {
+        font-size: clamp(2.2rem, 7.5vw, 3.2rem);
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.95);
+      }
+      .hero-lux-title .t-line2 {
+        font-size: clamp(2.2rem, 7.5vw, 3.2rem);
+        font-weight: 600;
+        color: var(--cyan);
+        text-shadow: 0 2px 10px rgba(0,0,0,0.95);
+      }
+      .hero-lux-tags span {
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 1px 8px rgba(0,0,0,0.95);
+      }
+      .hero-lux-desc {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.95);
+      }
+      .btn-hero-primary, .btn-hero-secondary {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 12px 20px;
+      }
+      .hero-lux-ctas { margin-bottom: 2.5rem; }
+      .hero-stats { gap: 1.2rem; }
+      .hero-stats .stat-number { font-size: 1.8rem; }
+      .hero-stats .stat-label { font-size: 0.72rem; }
+
+      /* Grids & Cards Mobile */
       .grid-2 { grid-template-columns: 1fr; }
-      .hero-img-frame { max-width: 320px; margin: 0 auto; }
-      .hero-img-main { height: 380px; }
-      .hero-img-badge { left: -10px; bottom: -10px; }
-      .hero-img-badge-2 { right: -10px; top: 20px; }
-      .hero-stats { gap: 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      .units-grid { grid-template-columns: 1fr; }
-      .team-grid { grid-template-columns: 1fr; }
-      .journey-steps { grid-template-columns: repeat(2, 1fr); }
-      .gallery-masonry { grid-template-columns: 1fr; }
-      .gallery-item.tall { grid-row: span 1; }
+      .services-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .service-card .service-body { padding: 18px; }
+      .units-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .unit-card { padding: 22px; }
+      .team-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .journey-steps { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
       .testimonials-grid { grid-template-columns: 1fr; }
-      .testimonials-stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-      .location-grid { grid-template-columns: 1fr; }
+      .testimonials-stats { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+      .location-grid { grid-template-columns: 1fr; gap: 1.25rem; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; text-align: center; }
-      .wa-chat-window { width: 290px; }
+      .gallery-slide img { height: 280px; }
+      .faq-two-col { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.65rem; }
     }
 
     @media (max-width: 480px) {
-      #hero h1 { font-size: 1.9rem; }
-      .hero-ctas { flex-direction: column; }
-      .hero-ctas .btn { text-align: center; justify-content: center; }
+      .hero-lux-title .t-line1, .hero-lux-title .t-line2 { font-size: 2rem; }
       .journey-steps { grid-template-columns: 1fr; }
       .testimonials-stats { grid-template-columns: repeat(2, 1fr); }
-      .section-title { font-size: 1.65rem; }
+      .section-title { font-size: 1.5rem; }
     }
+
+    /* FAQ dois blocos lado a lado */
+    .faq-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .faq-col { display: flex; flex-direction: column; gap: 1rem; }
   </style>
 </head>
 <body>
@@ -2148,7 +2264,7 @@
       <div class="container">
         <div class="section-header text-center reveal">
           <span class="tag-label">Nossos Pilares</span>
-          <h2 class="section-title">Serviços <span style="color:var(--cyan)">Premium</span> de Saúde</h2>
+          <h2 class="section-title">Serviços <span style="color:var(--cyan)">Especializados</span> em Saúde</h2>
           <p class="section-subtitle" style="margin-top:0.75rem">Abordagem integrativa e personalizada para cada fase da sua vida, com profissionais altamente qualificados.</p>
         </div>
         <div class="services-grid">
@@ -2156,8 +2272,7 @@
           <div class="service-card reveal delay-1">
             <img src="Serviços005.jpg" alt="Aluna praticando Pilates no Reformer" class="service-img" loading="lazy">
             <div class="service-body">
-              <div class="service-icon">🧘</div>
-              <h3>Pilates Clínico & Funcional</h3>
+              <h3>Pilates Clínico e Funcional</h3>
               <p class="service-tagline">O método que transforma corpos e mentes</p>
               <p>Exercícios precisos em solo e aparelhos (Reformer, Cadillac, Chair) para fortalecer o core, melhorar a postura e aliviar dores crônicas.</p>
               <div class="service-benefits">
@@ -2167,15 +2282,14 @@
                 <span class="benefit-tag">Equilíbrio</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Ol%C3%A1%21+Tenho+interesse+em+Pilates." class="service-card-link" target="_blank" rel="noopener">
-              Agendar avaliação →
+            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Pilates." class="service-card-link" target="_blank" rel="noopener">
+              Agendar avaliação
             </a>
           </div>
           <!-- Card 2: Fisioterapia -->
           <div class="service-card reveal delay-2">
-            <img src="Serviços002.jpg" alt="Exercício de Pilates no Cadillac" class="service-img" loading="lazy">
+            <img src="Serviços002.jpg" alt="Exercício de reabilitação no Cadillac" class="service-img" loading="lazy">
             <div class="service-body">
-              <div class="service-icon">🩺</div>
               <h3>Fisioterapia Integrativa</h3>
               <p class="service-tagline">Ciência e cuidado para sua recuperação</p>
               <p>Técnicas clássicas de fisioterapia combinadas com recursos modernos para tratar a causa raiz da dor e acelerar sua reabilitação.</p>
@@ -2186,18 +2300,14 @@
                 <span class="benefit-tag">Tendinites</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Ol%C3%A1%21+Tenho+interesse+em+Fisioterapia." class="service-card-link" target="_blank" rel="noopener">
-              Agendar avaliação →
+            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Fisioterapia." class="service-card-link" target="_blank" rel="noopener">
+              Agendar avaliação
             </a>
           </div>
           <!-- Card 3: Quiropraxia -->
           <div class="service-card reveal delay-3">
-            <div class="service-img-placeholder">
-              <div class="icon">🦴</div>
-              <span>Quiropraxia</span>
-            </div>
+            <img src="Servicos-Quiropraxia.png" alt="Sessão de quiropraxia com profissional especializado" class="service-img" loading="lazy" style="object-position: center top;">
             <div class="service-body">
-              <div class="service-icon">🦴</div>
               <h3>Quiropraxia</h3>
               <p class="service-tagline">Alinhamento preciso para liberdade de movimento</p>
               <p>Manipulações articulares precisas e seguras para corrigir subluxações vertebrais, aliviar dores e restaurar a amplitude de movimento.</p>
@@ -2208,16 +2318,15 @@
                 <span class="benefit-tag">Ciática</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Ol%C3%A1%21+Tenho+interesse+em+Quiropraxia." class="service-card-link" target="_blank" rel="noopener">
-              Agendar avaliação →
+            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Quiropraxia." class="service-card-link" target="_blank" rel="noopener">
+              Agendar avaliação
             </a>
           </div>
           <!-- Card 4: Massagem -->
           <div class="service-card reveal delay-1">
             <img src="Serviços001.jpg" alt="Sessão de relaxamento com bola terapêutica" class="service-img" loading="lazy">
             <div class="service-body">
-              <div class="service-icon">💆</div>
-              <h3>Massagem Relaxante & Terapêutica</h3>
+              <h3>Massagem Relaxante e Terapêutica</h3>
               <p class="service-tagline">Renove seu corpo, acalme sua mente</p>
               <p>Técnicas manuais que atuam no alívio profundo de tensões, estresse e promoção do bem-estar integral. Um ritual de autocuidado.</p>
               <div class="service-benefits">
@@ -2226,15 +2335,14 @@
                 <span class="benefit-tag">Qualidade do Sono</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Ol%C3%A1%21+Tenho+interesse+em+Massagem." class="service-card-link" target="_blank" rel="noopener">
-              Agendar sessão →
+            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Massagem." class="service-card-link" target="_blank" rel="noopener">
+              Agendar sessão
             </a>
           </div>
           <!-- Card 5: Danças -->
           <div class="service-card reveal delay-2">
             <img src="Espaço001.jpg" alt="Alunas praticando dança no estúdio com espelho" class="service-img" loading="lazy" style="object-position: center;">
             <div class="service-body">
-              <div class="service-icon">💃</div>
               <h3>Danças</h3>
               <p class="service-tagline">Mova-se com alegria e expressão</p>
               <p>Ballet, jazz e ritmos para todas as idades. Condicionamento físico, coordenação motora e expressão artística em um ambiente acolhedor.</p>
@@ -2245,19 +2353,15 @@
                 <span class="benefit-tag">Cardio</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Ol%C3%A1%21+Tenho+interesse+nas+aulas+de+dan%C3%A7a." class="service-card-link" target="_blank" rel="noopener">
-              Agendar aula →
+            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse nas aulas de dança." class="service-card-link" target="_blank" rel="noopener">
+              Agendar aula
             </a>
           </div>
-          <!-- Card 6: Yoga & Terapias -->
+          <!-- Card 6: Yoga e Terapias -->
           <div class="service-card reveal delay-3">
-            <div class="service-img-placeholder">
-              <div class="icon">☯️</div>
-              <span>Yoga & Integrativo</span>
-            </div>
+            <img src="Servicos-Yoga.png" alt="Aula de yoga em estúdio moderno e acolhedor" class="service-img" loading="lazy" style="object-position: center;">
             <div class="service-body">
-              <div class="service-icon">☯️</div>
-              <h3>Yoga & Terapias Integrativas</h3>
+              <h3>Yoga e Terapias Integrativas</h3>
               <p class="service-tagline">Equilíbrio profundo entre mente, corpo e espírito</p>
               <p>Asanas, pranayama e meditação complementados com Reiki, Terapia Floral e práticas integrativas para equilíbrio total.</p>
               <div class="service-benefits">
@@ -2267,8 +2371,8 @@
                 <span class="benefit-tag">Meditação</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Ol%C3%A1%21+Tenho+interesse+em+Yoga+e+terapias." class="service-card-link" target="_blank" rel="noopener">
-              Agendar sessão →
+            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Yoga e terapias." class="service-card-link" target="_blank" rel="noopener">
+              Agendar sessão
             </a>
           </div>
         </div>
@@ -2359,8 +2463,8 @@
             <span class="tag-label">Fundadora &amp; Mentora</span>
             <h2>Janaína Portes: Paixão pelo <span>Movimento Consciente</span> e Transformação de Vidas</h2>
             <p>A história do Studio Janaína Portes nasceu do compromisso inabalável de sua fundadora com a saúde, a longevidade e a qualidade de vida por meio do movimento. Com vasta experiência no método Pilates e na análise biomecânica do corpo, Janaína construiu sua trajetória fundamentada na crença de que a verdadeira força surge do equilíbrio entre mente, corpo e respiração.</p>
-            <p>Ao longo de sua carreira no Rio de Janeiro, especializou-se em traduzir os princípios fundamentais de Joseph Pilates em uma prática acessível, segura e profundamente eficiente. Seja na prevenção de dores, no fortalecimento do powerhouse ou na melhora da performance atlética, sua abordagem combina precisão técnica e sensibilidade para acolher as particularidades de cada aluno.</p>
-            <p>À frente do Studio, ela atua não apenas como instrutora e especialista, mas como uma mentora dedicada ao bem-estar contínuo de seus alunos. Cada aula é planejada com rigor técnico e atenção individual, permitindo que cada pessoa supere limitações físicas, alcance uma postura elegante e conquiste maior vitalidade.</p>
+            <p>Ao longo de sua carreira no Rio de Janeiro, especializou-se em traduzir os princípios de Joseph Pilates em uma prática acessível, segura e profundamente eficiente. Na prevenção de dores, no fortalecimento do powerhouse ou na melhora da performance atlética, sua abordagem une precisão técnica e sensibilidade para acolher as particularidades de cada aluno.</p>
+            <p>À frente do Studio, ela atua como instrutora, especialista e mentora dedicada ao bem-estar contínuo de seus alunos. Cada aula é planejada com rigor técnico e atenção individual, para que cada pessoa supere suas limitações, conquiste uma postura elegante e ganhe mais vitalidade no dia a dia.</p>
             <div class="founder-credentials">
               <span class="cred-chip"><span class="dot"></span>Fisioterapeuta</span>
               <span class="cred-chip"><span class="dot"></span>Esp. em Pilates</span>
@@ -2524,31 +2628,39 @@
       <div class="container">
         <div class="section-header text-center reveal">
           <span class="tag-label">Nosso Espaço</span>
-          <h2 class="section-title">Galeria <span style="color:var(--cyan)">Premium</span></h2>
-          <p class="section-subtitle" style="margin-top:0.75rem">Um ambiente sofisticado, equipado e acolhedor para a sua transformação.</p>
+          <h2 class="section-title">Conheça o <span style="color:var(--cyan)">Studio</span></h2>
+          <p class="section-subtitle" style="margin-top:0.75rem">Um ambiente sofisticado, equipado e acolhedor para cada momento da sua jornada.</p>
         </div>
-        <div class="gallery-masonry">
-          <div class="gallery-item tall reveal delay-1">
-            <img src="Espaço002.jpg" alt="Sala de Pilates com aparelhos modernos — Studio Janaína Portes" loading="lazy">
-            <div class="overlay"><span>Sala de Pilates</span></div>
-          </div>
-          <div class="gallery-item reveal delay-2">
-            <img src="Serviços002.jpg" alt="Exercício de Pilates no Cadillac" loading="lazy" style="object-position: top;">
-            <div class="overlay"><span>Pilates no Cadillac</span></div>
-          </div>
-          <div class="gallery-item reveal delay-3">
-            <img src="Espaço003.jpg" alt="Vista do estúdio de Pilates com equipamentos" loading="lazy">
-            <div class="overlay"><span>Equipamentos Profissionais</span></div>
-          </div>
-          <div class="gallery-item wide reveal delay-1">
-            <img src="Espaço001.jpg" alt="Sala de dança versátil com espelho e barra de ballet" loading="lazy" style="object-position: center;">
-            <div class="overlay"><span>Espaço Versátil — Danças</span></div>
-          </div>
-          <div class="gallery-item reveal delay-2">
-            <img src="Serviços005.jpg" alt="Pilates no Reformer" loading="lazy" style="object-position: top;">
-            <div class="overlay"><span>Pilates Reformer</span></div>
+        <!-- Carrossel de fotos -->
+        <div class="gallery-carousel-wrap reveal">
+          <!-- Setas de navegação -->
+          <button class="gallery-arrow prev" id="gallery-prev" aria-label="Foto anterior">&#8592;</button>
+          <button class="gallery-arrow next" id="gallery-next" aria-label="Próxima foto">&#8594;</button>
+          <div class="gallery-carousel-track" id="gallery-track">
+            <div class="gallery-slide">
+              <img src="Espaço002.jpg" alt="Sala de Pilates com aparelhos modernos" loading="lazy">
+              <div class="gallery-slide-overlay"><span class="gallery-slide-label">Sala de Pilates</span></div>
+            </div>
+            <div class="gallery-slide">
+              <img src="Serviços002.jpg" alt="Exercício de reabilitação no Cadillac" loading="lazy" style="object-position: top;">
+              <div class="gallery-slide-overlay"><span class="gallery-slide-label">Pilates no Cadillac</span></div>
+            </div>
+            <div class="gallery-slide">
+              <img src="Espaço003.jpg" alt="Estúdio de Pilates com equipamentos completos" loading="lazy">
+              <div class="gallery-slide-overlay"><span class="gallery-slide-label">Equipamentos Profissionais</span></div>
+            </div>
+            <div class="gallery-slide">
+              <img src="Espaço001.jpg" alt="Sala de dança com espelho e barra de ballet" loading="lazy" style="object-position: center;">
+              <div class="gallery-slide-overlay"><span class="gallery-slide-label">Espaço de Danças</span></div>
+            </div>
+            <div class="gallery-slide">
+              <img src="Serviços005.jpg" alt="Pilates no Reformer" loading="lazy" style="object-position: top;">
+              <div class="gallery-slide-overlay"><span class="gallery-slide-label">Pilates Reformer</span></div>
+            </div>
           </div>
         </div>
+        <!-- Indicadores (dots) -->
+        <div class="gallery-dots" id="gallery-dots"></div>
       </div>
     </section>
 
@@ -2637,79 +2749,103 @@
         <div class="section-header text-center reveal">
           <span class="tag-label">Dúvidas?</span>
           <h2 class="section-title">Perguntas <span style="color:var(--cyan)">Frequentes</span></h2>
-          <p class="section-subtitle" style="margin-top:0.75rem">Respondemos as dúvidas mais comuns. Tem mais alguma? Fale conosco no WhatsApp!</p>
+          <p class="section-subtitle" style="margin-top:0.75rem">Respondemos as dúvidas mais comuns. Tem mais? Fale conosco pelo WhatsApp.</p>
         </div>
-        <div class="faq-list">
-          <div class="faq-item reveal delay-1">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>Como funciona a primeira consulta no Studio?</h3>
-              <div class="faq-toggle">+</div>
+        <div class="faq-two-col">
+          <!-- Coluna 1 -->
+          <div class="faq-col">
+            <div class="faq-item reveal delay-1">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>Como funciona a primeira consulta no Studio?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>A primeira visita é uma avaliação postural e funcional completa. Nossa especialista avalia seu histórico de saúde, realiza testes de mobilidade, força e postura, e define junto com você os objetivos e o plano de tratamento mais adequado para o seu caso.</p>
+              </div>
             </div>
-            <div class="faq-answer">
-              <p>A primeira visita ao Studio é uma avaliação postural e funcional completa. Nossa especialista avalia seu histórico de saúde, realiza testes de mobilidade, força e postura, e define junto com você os objetivos e o plano de tratamento mais adequado para o seu caso.</p>
+            <div class="faq-item reveal delay-2">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>Qual a diferença entre o Pilates no solo e no aparelho?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>O Pilates em solo usa o peso do próprio corpo como resistência, sendo ótimo para iniciantes e manutenção. Já nos aparelhos (Reformer, Cadillac, Chair) é possível graduar a resistência com precisão, o que potencializa resultados tanto na reabilitação quanto no condicionamento avançado.</p>
+              </div>
             </div>
-          </div>
-          <div class="faq-item reveal delay-2">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>Qual a diferença entre o Pilates no solo e no aparelho?</h3>
-              <div class="faq-toggle">+</div>
+            <div class="faq-item reveal delay-3">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>O Pilates é indicado para quem tem dor na coluna?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>Sim. O Pilates clínico é um dos métodos mais indicados para tratar e prevenir dores na coluna vertebral. Com supervisão de fisioterapeuta especializada, os exercícios fortalecem a musculatura de suporte sem sobrecarregar estruturas comprometidas.</p>
+              </div>
             </div>
-            <div class="faq-answer">
-              <p>O Pilates em solo utiliza o peso do próprio corpo como resistência, sendo ótimo para iniciantes e manutenção. O Pilates em aparelhos (Reformer, Cadillac, Chair) permite graduar a resistência com precisão, aumentando o desafio e a eficácia, especialmente em reabilitação e condicionamento avançado.</p>
+            <div class="faq-item reveal delay-4">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>Posso fazer Pilates durante a gravidez?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>Sim, com autorização médica. Contamos com a Fisioterapeuta Larissa Bráz, especialista em Pilates para Gestantes. O método adaptado traz benefícios reais durante a gravidez: alívio de dores lombares, fortalecimento do assoalho pélvico, melhora postural e preparo para o parto.</p>
+              </div>
             </div>
-          </div>
-          <div class="faq-item reveal delay-3">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>O Pilates é indicado para quem tem dor na coluna?</h3>
-              <div class="faq-toggle">+</div>
-            </div>
-            <div class="faq-answer">
-              <p>Sim! O Pilates clínico é um dos métodos mais indicados para tratamento e prevenção de dores na coluna vertebral. Com supervisão de um profissional habilitado — como nossa equipe de fisioterapeutas —, os exercícios fortalecem a musculatura de suporte da coluna sem sobrecarregar estruturas comprometidas.</p>
-            </div>
-          </div>
-          <div class="faq-item reveal delay-4">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>Posso fazer Pilates durante a gravidez?</h3>
-              <div class="faq-toggle">+</div>
-            </div>
-            <div class="faq-answer">
-              <p>Sim, com autorização médica. O Studio conta com a Fisioterapeuta Larissa Bráz, especialista em Pilates para Gestantes. O método adaptado traz inúmeros benefícios durante a gravidez: alívio de dores lombares, fortalecimento do assoalho pélvico, melhor postura e preparo para o parto.</p>
-            </div>
-          </div>
-          <div class="faq-item reveal delay-5">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>Qual unidade devo escolher — Méier ou Barra da Tijuca?</h3>
-              <div class="faq-toggle">+</div>
-            </div>
-            <div class="faq-answer">
-              <p>Ambas as unidades oferecem os mesmos serviços e o mesmo padrão de qualidade que é a marca registrada do Studio Janaína Portes. A escolha pode ser feita pela proximidade da sua casa ou trabalho. Entre em contato pelo WhatsApp de cada unidade e nossa equipe irá orientá-lo(a) da melhor forma.</p>
-            </div>
-          </div>
-          <div class="faq-item reveal" style="transition-delay:0.6s">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>Quantas sessões são necessárias para ver resultados?</h3>
-              <div class="faq-toggle">+</div>
-            </div>
-            <div class="faq-answer">
-              <p>Os resultados variam de acordo com o objetivo e a condição individual. Porém, muitos pacientes relatam melhora significativa já nas primeiras 10 sessões. Para resultados duradouros, recomendamos a prática contínua e regular — idealmente de 2 a 3 vezes por semana.</p>
+            <div class="faq-item reveal delay-5">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>Qual unidade devo escolher: Méier ou Barra da Tijuca?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>As duas unidades oferecem os mesmos serviços e o mesmo padrão de qualidade. A escolha pode ser pela proximidade da sua casa ou trabalho. Fale com a equipe pelo WhatsApp de cada unidade e nossa equipe orienta o melhor caminho.</p>
+              </div>
             </div>
           </div>
-          <div class="faq-item reveal" style="transition-delay:0.7s">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>O Studio atende plano de saúde?</h3>
-              <div class="faq-toggle">+</div>
+          <!-- Coluna 2 -->
+          <div class="faq-col">
+            <div class="faq-item reveal delay-1">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>Quantas sessões são necessárias para ver resultados?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>Os resultados variam conforme o objetivo e a condição individual. Muitos pacientes relatam melhora significativa já nas primeiras 10 sessões. Para resultados duradouros, recomendamos a prática regular de 2 a 3 vezes por semana.</p>
+              </div>
             </div>
-            <div class="faq-answer">
-              <p>Para informações sobre convênios e formas de pagamento, entre em contato diretamente com nossa equipe pelo WhatsApp. Temos opções flexíveis para facilitar o acesso ao cuidado integral que você merece.</p>
+            <div class="faq-item reveal delay-2">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>O Studio atende plano de saúde?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>Para informações sobre convênios e formas de pagamento, entre em contato pelo WhatsApp. Temos opções flexíveis para facilitar o acesso ao cuidado que você merece.</p>
+              </div>
             </div>
-          </div>
-          <div class="faq-item reveal" style="transition-delay:0.8s">
-            <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
-              <h3>Vocês atendem crianças e idosos?</h3>
-              <div class="faq-toggle">+</div>
+            <div class="faq-item reveal delay-3">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>Vocês atendem crianças e idosos?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>Sim. Nossa equipe está preparada para todas as faixas etárias. Temos aulas de dança para crianças, Pilates adaptado para a melhor idade e programas específicos para cada fase da vida. Cada atendimento é personalizado.</p>
+              </div>
             </div>
-            <div class="faq-answer">
-              <p>Sim! Nossa equipe é preparada para atender todas as faixas etárias. Temos aulas de dança para crianças, Pilates adaptado para a melhor idade, e programas específicos para cada fase da vida. Cada atendimento é personalizado para as necessidades individuais.</p>
+            <div class="faq-item reveal delay-4">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>O estúdio tem estacionamento?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>Consulte nossa equipe pelo WhatsApp para informações sobre facilidades de acesso e estacionamento em cada unidade. Vamos orientar você da melhor forma.</p>
+              </div>
+            </div>
+            <div class="faq-item reveal delay-5">
+              <div class="faq-question" onclick="toggleFaq(this)" role="button" aria-expanded="false" tabindex="0">
+                <h3>A quiropraxia é segura? Para quem é indicada?</h3>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-answer">
+                <p>Sim, quando realizada por profissional habilitado. A quiropraxia é indicada para cervicalgia, lombalgia, dor ciática, cefaleia tensional, hérnias discais e travamentos articulares. Nossa equipe realiza avaliação prévia para indicar o tratamento ideal para cada caso.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -2804,9 +2940,9 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo">
-            <img src="Logo-principal.jpeg" alt="Logo Studio Janaína Portes" loading="lazy">
+            <img src="Logo-principal.jpeg" alt="Logo Studio Janaína Portes" loading="lazy" style="height:80px;width:80px;object-fit:cover;border-radius:50%;border:2px solid rgba(0,194,203,0.5);filter:none;opacity:1;">
           </div>
-          <p class="footer-desc">Saúde integrativa, bem-estar e qualidade de vida através do movimento consciente. Duas unidades no Rio de Janeiro para cuidar de você.</p>
+          <p class="footer-desc">Saúde integrativa, bem-estar e qualidade de vida por meio do movimento consciente. Duas unidades no Rio de Janeiro para cuidar de você.</p>
         </div>
         <div class="footer-col">
           <h4>Serviços</h4>
@@ -3047,6 +3183,58 @@
         initChat();
       }
     }, 4000);
+
+    // ---- GALLERY CAROUSEL ----
+    (function() {
+      const track = document.getElementById('gallery-track');
+      const dotsContainer = document.getElementById('gallery-dots');
+      const prevBtn = document.getElementById('gallery-prev');
+      const nextBtn = document.getElementById('gallery-next');
+      if (!track) return;
+
+      const slides = track.querySelectorAll('.gallery-slide');
+      const total = slides.length;
+      let current = 0;
+      let autoTimer;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Ir para foto ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      function updateDots() {
+        dotsContainer.querySelectorAll('.gallery-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        updateDots();
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      function startAuto() {
+        autoTimer = setInterval(next, 4000);
+      }
+      function stopAuto() {
+        clearInterval(autoTimer);
+      }
+
+      prevBtn.addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
+      nextBtn.addEventListener('click', () => { stopAuto(); next(); startAuto(); });
+      track.parentElement.addEventListener('mouseenter', stopAuto);
+      track.parentElement.addEventListener('mouseleave', startAuto);
+
+      startAuto();
+    })();
 
     // ---- SMOOTH ANCHOR SCROLL (offset for fixed navbar) ----
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
