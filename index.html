@@ -374,6 +374,45 @@
     }
     .nav-links a:hover { color: var(--white); }
     .nav-links a:hover::after { width: 100%; }
+
+    /* Dropdown Services Menu */
+    .nav-item-dropdown { position: relative; }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -10px;
+      background: rgba(13, 26, 46, 0.98);
+      border: 1px solid rgba(0, 194, 203, 0.3);
+      border-radius: 12px;
+      padding: 12px 0;
+      min-width: 270px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(15px);
+      z-index: 1100;
+    }
+    .nav-item-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: rgba(255,255,255,0.9) !important;
+      font-size: 0.88rem !important;
+      transition: all 0.2s ease !important;
+    }
+    .dropdown-menu a::after { display: none !important; }
+    .dropdown-menu a:hover {
+      background: rgba(0, 194, 203, 0.15);
+      color: var(--cyan) !important;
+      padding-left: 24px !important;
+    }
+
     .nav-cta { display: flex; align-items: center; gap: 1rem; }
     .hamburger {
       display: none;
@@ -2357,7 +2396,17 @@
           <div class="nav-logo-name">Studio Janaína Portes<span>Saúde &amp; Bem-Estar</span></div>
         </a>
         <ul class="nav-links" role="list">
-          <li><a href="#servicos">Serviços</a></li>
+          <li class="nav-item-dropdown">
+            <a href="#servicos" style="cursor:pointer;">Serviços ▾</a>
+            <div class="dropdown-menu">
+              <a href="pilates-clinico.html">Pilates Clínico &amp; Funcional</a>
+              <a href="fisioterapia-integrativa.html">Fisioterapia Integrativa</a>
+              <a href="quiropraxia.html">Quiropraxia</a>
+              <a href="massagem-relaxante.html">Massagem Relaxante</a>
+              <a href="dancas.html">Danças (Ballet/Jazz)</a>
+              <a href="yoga-terapias.html">Yoga &amp; Terapias Integrativas</a>
+            </div>
+          </li>
           <li><a href="#fundadora">Nossa Fundadora</a></li>
           <li><a href="#equipe">Equipe</a></li>
           <li><a href="#galeria">Galeria</a></li>
@@ -2378,7 +2427,15 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu mobile">
-    <a href="#servicos" class="mobile-link">Serviços</a>
+    <a href="#servicos" class="mobile-link" style="font-weight:700;color:var(--cyan);">Serviços</a>
+    <div style="padding-left:16px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+      <a href="pilates-clinico.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Pilates Clínico &amp; Funcional</a>
+      <a href="fisioterapia-integrativa.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Fisioterapia Integrativa</a>
+      <a href="quiropraxia.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Quiropraxia</a>
+      <a href="massagem-relaxante.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Massagem Relaxante</a>
+      <a href="dancas.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Danças (Ballet/Jazz)</a>
+      <a href="yoga-terapias.html" class="mobile-link" style="font-size:0.9rem;opacity:0.9;">• Yoga &amp; Terapias Integrativas</a>
+    </div>
     <a href="#fundadora" class="mobile-link">Nossa Fundadora</a>
     <a href="#equipe" class="mobile-link">Equipe</a>
     <a href="#galeria" class="mobile-link">Galeria</a>
@@ -2498,7 +2555,7 @@
         </div>
         <div class="services-grid">
           <!-- Card 1: Pilates -->
-          <div class="service-card reveal delay-1">
+          <div class="service-card reveal delay-1" onclick="window.location.href='pilates-clinico.html'" style="cursor:pointer;">
             <img src="Serviços005.jpg" alt="Aluna praticando Pilates no Reformer" class="service-img" loading="lazy">
             <div class="service-body">
               <h3>Pilates Clínico e Funcional</h3>
@@ -2511,12 +2568,12 @@
                 <span class="benefit-tag">Equilíbrio</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Pilates." class="service-card-link" target="_blank" rel="noopener">
-              Agendar avaliação
+            <a href="pilates-clinico.html" class="service-card-link">
+              Ler Artigo Completo →
             </a>
           </div>
           <!-- Card 2: Fisioterapia -->
-          <div class="service-card reveal delay-2">
+          <div class="service-card reveal delay-2" onclick="window.location.href='fisioterapia-integrativa.html'" style="cursor:pointer;">
             <img src="Serviços002.jpg" alt="Exercício de reabilitação no Cadillac" class="service-img" loading="lazy">
             <div class="service-body">
               <h3>Fisioterapia Integrativa</h3>
@@ -2529,12 +2586,12 @@
                 <span class="benefit-tag">Tendinites</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Fisioterapia." class="service-card-link" target="_blank" rel="noopener">
-              Agendar avaliação
+            <a href="fisioterapia-integrativa.html" class="service-card-link">
+              Ler Artigo Completo →
             </a>
           </div>
           <!-- Card 3: Quiropraxia -->
-          <div class="service-card reveal delay-3">
+          <div class="service-card reveal delay-3" onclick="window.location.href='quiropraxia.html'" style="cursor:pointer;">
             <img src="Servicos-Quiropraxia.png" alt="Sessão de quiropraxia com profissional especializado" class="service-img" loading="lazy" style="object-position: center top;">
             <div class="service-body">
               <h3>Quiropraxia</h3>
@@ -2547,12 +2604,12 @@
                 <span class="benefit-tag">Ciática</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Quiropraxia." class="service-card-link" target="_blank" rel="noopener">
-              Agendar avaliação
+            <a href="quiropraxia.html" class="service-card-link">
+              Ler Artigo Completo →
             </a>
           </div>
           <!-- Card 4: Massagem -->
-          <div class="service-card reveal delay-1">
+          <div class="service-card reveal delay-1" onclick="window.location.href='massagem-relaxante.html'" style="cursor:pointer;">
             <img src="Serviços001.jpg" alt="Sessão de relaxamento com bola terapêutica" class="service-img" loading="lazy">
             <div class="service-body">
               <h3>Massagem Relaxante e Terapêutica</h3>
@@ -2564,12 +2621,12 @@
                 <span class="benefit-tag">Qualidade do Sono</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Massagem." class="service-card-link" target="_blank" rel="noopener">
-              Agendar sessão
+            <a href="massagem-relaxante.html" class="service-card-link">
+              Ler Artigo Completo →
             </a>
           </div>
           <!-- Card 5: Danças -->
-          <div class="service-card reveal delay-2">
+          <div class="service-card reveal delay-2" onclick="window.location.href='dancas.html'" style="cursor:pointer;">
             <img src="Espaço001.jpg" alt="Alunas praticando dança no estúdio com espelho" class="service-img" loading="lazy" style="object-position: center;">
             <div class="service-body">
               <h3>Danças</h3>
@@ -2582,12 +2639,12 @@
                 <span class="benefit-tag">Cardio</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse nas aulas de dança." class="service-card-link" target="_blank" rel="noopener">
-              Agendar aula
+            <a href="dancas.html" class="service-card-link">
+              Ler Artigo Completo →
             </a>
           </div>
           <!-- Card 6: Yoga e Terapias -->
-          <div class="service-card reveal delay-3">
+          <div class="service-card reveal delay-3" onclick="window.location.href='yoga-terapias.html'" style="cursor:pointer;">
             <img src="Servicos-Yoga.png" alt="Aula de yoga em estúdio moderno e acolhedor" class="service-img" loading="lazy" style="object-position: center;">
             <div class="service-body">
               <h3>Yoga e Terapias Integrativas</h3>
@@ -2600,8 +2657,8 @@
                 <span class="benefit-tag">Meditação</span>
               </div>
             </div>
-            <a href="https://wa.me/5521972891926?text=Olá! Tenho interesse em Yoga e terapias." class="service-card-link" target="_blank" rel="noopener">
-              Agendar sessão
+            <a href="yoga-terapias.html" class="service-card-link">
+              Ler Artigo Completo →
             </a>
           </div>
         </div>
