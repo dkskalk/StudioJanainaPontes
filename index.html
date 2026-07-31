@@ -2155,7 +2155,18 @@
       .wa-chat-window { width: 290px; bottom: 65px; left: 0; }
 
       /* Hero Mobile & Contrast */
-      #hero { padding: 65px 0 15px; min-height: auto; overflow: hidden; }
+      #hero {
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 70px 0 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
       .hero-bg-photo { object-position: 80% 42%; width: 100%; }
       .hero-bg-overlay {
         background:
@@ -2170,7 +2181,13 @@
             transparent 30%
           );
       }
-      .hero-lux-inner { padding: 55px 0 10px; }
+      .hero-lux-inner {
+        padding: 10px 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+      }
       .hero-lux-pretitle span {
         font-weight: 500;
         color: rgba(255, 255, 255, 0.9);
