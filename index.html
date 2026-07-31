@@ -1471,72 +1471,128 @@
       background: radial-gradient(circle, rgba(243,192,16,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.75rem;
-      margin-top: 1rem;
-    }
-    .testimonial-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      backdrop-filter: blur(8px);
-      transition: all var(--transition);
-    }
-    .testimonial-card:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(243,192,16,0.3);
-      transform: translateY(-4px);
-    }
-    .stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
-    .testimonial-text {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.75;
-      font-style: italic;
-      margin-bottom: 1.5rem;
+    /* Real Social Proof Testimonials Section */
+    #depoimentos {
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+      padding: 90px 0;
       position: relative;
+      overflow: hidden;
     }
-    .testimonial-text::before {
-      content: '"';
-      font-family: var(--font-title);
-      font-size: 4rem;
-      color: var(--cyan);
-      opacity: 0.3;
-      position: absolute;
-      top: -20px; left: -10px;
-      line-height: 1;
+    .depo-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      background: rgba(243,192,16,0.12);
+      border: 1px solid rgba(243,192,16,0.35);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: 1rem;
+      margin-bottom: 2rem;
     }
-    .testimonial-author {
+    .depo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .depo-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0, 194, 203, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .depo-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(0, 194, 203, 0.5);
+      box-shadow: 0 20px 50px rgba(0, 194, 203, 0.22);
+    }
+    .depo-card-header {
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(13, 26, 46, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .author-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--cyan), var(--navy));
+    .depo-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .depo-zoom-hint {
+      font-size: 0.7rem;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .depo-img-wrap {
+      width: 100%;
+      background: #0d1a2e;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-title);
-      font-weight: 700;
-      font-size: 1rem;
+    }
+    .depo-img-wrap img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .depo-card:hover .depo-img-wrap img {
+      transform: scale(1.03);
+    }
+
+    /* Fullscreen Modal / Lightbox for Testimonial Images */
+    .depo-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 15, 26, 0.94);
+      backdrop-filter: blur(15px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+    .depo-modal.open { display: flex; }
+    .depo-modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0, 194, 203, 0.3);
+      border: 1px solid rgba(0, 194, 203, 0.4);
+    }
+    .depo-modal-img {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+      display: block;
+    }
+    .depo-modal-close {
+      position: absolute;
+      top: 15px; right: 25px;
       color: var(--white);
-      flex-shrink: 0;
+      font-size: 2.5rem;
+      cursor: pointer;
+      z-index: 10001;
+      line-height: 1;
     }
-    .author-info .name {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--white);
-    }
-    .author-info .service {
-      font-size: 0.75rem;
-      color: var(--cyan);
-      font-weight: 500;
-    }
+
     .testimonials-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -2772,59 +2828,156 @@
     <!-- ==========================================
          DEPOIMENTOS
     ========================================== -->
-    <section id="depoimentos" aria-label="Depoimentos de pacientes">
+    <!-- ==========================================
+         DEPOIMENTOS / PROVAS SOCIAIS REAIS
+    ========================================== -->
+    <section id="depoimentos" aria-label="Depoimentos e Provas Sociais Reais">
       <div class="container">
         <div class="section-header text-center reveal">
-          <span class="tag-label gold">Depoimentos</span>
-          <h2 class="section-title light">O que Nossos <span style="color:var(--cyan)">Pacientes</span> Dizem</h2>
-          <p class="section-subtitle light" style="margin-top:0.75rem">Histórias reais de transformação e qualidade de vida.</p>
-        </div>
-        <div class="testimonials-grid">
-          <div class="testimonial-card reveal delay-1">
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-text" style="padding-left: 20px;">O Studio Janaína Portes mudou minha relação com o meu corpo. As aulas de Pilates me ajudaram a eliminar dores nas costas que carregava há anos. Atendimento impecável e personalizado!</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">AP</div>
-              <div class="author-info">
-                <div class="name">Ana Paula M.</div>
-                <div class="service">Pilates Clínico • Méier</div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card reveal delay-2">
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-text" style="padding-left: 20px;">Profissionais excepcionais! A Janaína tem um dom para entender o corpo de cada aluno. Em apenas 3 meses de tratamento, recuperei a mobilidade que havia perdido após uma cirurgia.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar" style="background:linear-gradient(135deg,var(--gold),#E8B80D);color:var(--navy);">RS</div>
-              <div class="author-info">
-                <div class="name">Roberta S.</div>
-                <div class="service">Fisioterapia • Barra da Tijuca</div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card reveal delay-3">
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-text" style="padding-left: 20px;">Nunca imaginei que o Pilates me transformaria tanto. Melhorei minha postura, eliminei as dores lombares e ainda melhorei minha performance no esporte. Recomendo a todos!</p>
-            <div class="testimonial-author">
-              <div class="author-avatar" style="background:linear-gradient(135deg,#1a3060,var(--cyan));">CE</div>
-              <div class="author-info">
-                <div class="name">Carlos E.</div>
-                <div class="service">Pilates Funcional • Méier</div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card reveal delay-4">
-            <div class="stars">★★★★★</div>
-            <p class="testimonial-text" style="padding-left: 20px;">O ambiente é lindo, as profissionais são atenciosas e o resultado é incrível. Faço Pilates e sessões de massagem, e me sinto outra pessoa. Gratidão enorme ao Studio!</p>
-            <div class="testimonial-author">
-              <div class="author-avatar" style="background:linear-gradient(135deg,var(--cyan),var(--gold));">FL</div>
-              <div class="author-info">
-                <div class="name">Fernanda L.</div>
-                <div class="service">Pilates + Massagem • Barra da Tijuca</div>
-              </div>
-            </div>
+          <span class="tag-label gold">Provas Sociais Reais</span>
+          <h2 class="section-title light">Histórias &amp; <span style="color:var(--cyan)">Avaliações Reais</span></h2>
+          <p class="section-subtitle light" style="margin-top:0.75rem">Depoimentos espontâneos de nossos alunos e pacientes no Instagram e WhatsApp.</p>
+          
+          <div class="depo-header-badge">
+            <span>⭐ 5.0 no Google &amp; Redes Sociais</span>
+            <span>•</span>
+            <span>+500 Pacientes Atendidos</span>
           </div>
         </div>
+
+        <div class="depo-grid">
+          <!-- Depo 1 -->
+          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo001.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo001.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 2 -->
+          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo002.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo002.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 3 -->
+          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo003.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo003.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 4 -->
+          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo004.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo004.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 5 -->
+          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo005.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo005.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 6 -->
+          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo006.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo006.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 7 -->
+          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo007.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo007.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 8 -->
+          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo008.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo008.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 9 -->
+          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo009.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo009.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 10 -->
+          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo010.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo010.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 11 -->
+          <div class="depo-card reveal delay-2" onclick="openDepoModal('Depo011.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo011.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 12 -->
+          <div class="depo-card reveal delay-3" onclick="openDepoModal('Depo012.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo012.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+          <!-- Depo 13 -->
+          <div class="depo-card reveal delay-1" onclick="openDepoModal('Depo013.jpg')">
+            <div class="depo-card-header">
+              <div class="depo-badge"><span>💬</span><span>Avaliação Real</span></div>
+              <span class="depo-zoom-hint">🔍 Ampliar</span>
+            </div>
+            <div class="depo-img-wrap">
+              <img src="Depo013.jpg" alt="Depoimento real de paciente do Studio Janaína Portes" loading="lazy">
+            </div>
+          </div>
+        </div>
+
         <div class="testimonials-stats">
           <div class="t-stat reveal delay-1">
             <div class="num">+500</div>
@@ -2845,6 +2998,14 @@
         </div>
       </div>
     </section>
+
+    <!-- Modal Lightbox para Ampliação dos Depoimentos -->
+    <div id="depo-modal" class="depo-modal" onclick="closeDepoModal()">
+      <span class="depo-modal-close" onclick="closeDepoModal()">&times;</span>
+      <div class="depo-modal-content" onclick="event.stopPropagation()">
+        <img id="depo-modal-img" class="depo-modal-img" src="" alt="Ampliação de depoimento real">
+      </div>
+    </div>
 
     <!-- ==========================================
          FAQ
@@ -3345,6 +3506,23 @@
 
       startAuto();
     })();
+
+    // ---- DEPOIMENTOS LIGHTBOX MODAL ----
+    function openDepoModal(imgSrc) {
+      const modal = document.getElementById('depo-modal');
+      const modalImg = document.getElementById('depo-modal-img');
+      if (!modal || !modalImg) return;
+      modalImg.src = imgSrc;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDepoModal() {
+      const modal = document.getElementById('depo-modal');
+      if (!modal) return;
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     // ---- SMOOTH ANCHOR SCROLL (offset for fixed navbar) ----
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
