@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog &amp; Dicas de Saúde Integrativa | Studio Janaína Portes</title>
+  <meta name="description" content="Portal de artigos, colunas de especialistas e dicas práticas sobre Pilates, Fisioterapia Integrativa, Quiropraxia, Saúde da Mulher e Bem-Estar no Rio de Janeiro.">
+  <meta name="keywords" content="blog fisioterapia, blog pilates Rio de Janeiro, artigos saude da coluna Meier Barra da Tijuca">
+  <link rel="canonical" href="https://studio-janaina-portes.vercel.app/blog.html">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Blog &amp; Dicas de Saúde | Studio Janaína Portes">
+  <meta property="og:description" content="Artigos completos, colunas de especialistas e dicas de bem-estar com a Dra. Janaína Portes e equipe no RJ.">
+  <meta property="og:image" content="Espaço004.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #162846; --navy-dark: #0d1a2e; --navy-deep: #080f1a;
+      --cyan: #00C2CB; --cyan-dark: #00A6AF; --gold: #F3C010; --white: #FFFFFF; --offwhite: #F8FAFC;
+      --text: #2D3748; --text-muted: #64748B;
+      --font-body: 'Plus Jakarta Sans', sans-serif; --font-title: 'Outfit', sans-serif;
+      --shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--text); background-color: var(--offwhite); line-height: 1.7; overflow-x: hidden; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+    /* Header */
+    header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(13, 26, 46, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid var(--cyan); }
+    .nav-logo-name { font-family: var(--font-title); font-weight: 700; font-size: 1.1rem; color: var(--white); display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-logo-name span { font-size: 0.7rem; color: var(--cyan); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); font-size: 0.92rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a.active { color: var(--cyan); font-weight: 700; }
+
+    .nav-item-dropdown { position: relative; }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: -10px; background: rgba(13, 26, 46, 0.98);
+      border: 1px solid rgba(0, 194, 203, 0.3); border-radius: 12px; padding: 12px 0;
+      min-width: 260px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); opacity: 0; visibility: hidden;
+      transform: translateY(10px); transition: all 0.3s ease; backdrop-filter: blur(15px);
+    }
+    .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu a { display: block; padding: 10px 20px; color: rgba(255,255,255,0.9); font-size: 0.88rem; }
+    .dropdown-menu a:hover { background: rgba(0, 194, 203, 0.15); color: var(--cyan); padding-left: 24px; }
+
+    .btn-nav-agendar { background: linear-gradient(135deg, var(--gold), #e5b300); color: var(--navy-deep); font-weight: 700; padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; }
+
+    /* Hero */
+    .blog-hero { padding: 160px 0 70px; background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%); color: var(--white); text-align: center; position: relative; }
+    .blog-badge { display: inline-block; background: rgba(0,194,203,0.15); border: 1px solid var(--cyan); color: var(--cyan); font-size: 0.82rem; font-weight: 700; padding: 6px 20px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+    .blog-title { font-family: var(--font-title); font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 18px; }
+    .blog-subtitle { font-size: 1.15rem; color: rgba(255,255,255,0.8); max-width: 760px; margin: 0 auto 35px; }
+
+    /* Controls Bar: Search & Filter Tabs */
+    .blog-controls { background: var(--white); border-radius: 20px; padding: 24px; box-shadow: var(--shadow); border: 1px solid #E2E8F0; margin-top: -40px; position: relative; z-index: 10; margin-bottom: 50px; }
+    .search-box { display: flex; align-items: center; background: var(--offwhite); border: 1px solid #CBD5E1; border-radius: 12px; padding: 12px 20px; margin-bottom: 20px; transition: border-color 0.3s; }
+    .search-box:focus-within { border-color: var(--cyan); }
+    .search-box input { border: none; background: transparent; outline: none; width: 100%; font-size: 0.95rem; color: var(--navy); margin-left: 10px; }
+
+    .filter-tabs { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .tab-btn { background: var(--offwhite); border: 1px solid #E2E8F0; color: var(--text-muted); font-family: var(--font-title); font-weight: 600; font-size: 0.9rem; padding: 10px 22px; border-radius: 50px; cursor: pointer; transition: all 0.3s; }
+    .tab-btn:hover, .tab-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .tab-btn.active { background: var(--cyan); border-color: var(--cyan); color: var(--navy-deep); }
+
+    /* Blog Grid */
+    .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 80px; }
+    .article-card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 20px rgba(0,0,0,0.04); display: flex; flex-direction: column; transition: all 0.35s ease; }
+    .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,194,203,0.12); border-color: rgba(0,194,203,0.4); }
+
+    .card-banner { height: 200px; background-size: cover; background-position: center; position: relative; }
+    .card-banner-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(13,26,46,0.8) 100%); }
+    .card-tag { position: absolute; top: 16px; left: 16px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 6px 14px; border-radius: 50px; backdrop-filter: blur(10px); }
+    .tag-template1 { background: rgba(0,194,203,0.9); color: var(--navy-deep); }
+    .tag-template2 { background: rgba(243,192,16,0.95); color: var(--navy-deep); }
+    .tag-template3 { background: rgba(22,40,70,0.9); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+    .tag-servico { background: rgba(255,255,255,0.9); color: var(--navy); }
+
+    .card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-author { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .card-title { font-family: var(--font-title); font-size: 1.25rem; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 12px; }
+    .card-excerpt { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+
+    .card-footer { border-top: 1px solid #F1F5F9; padding-top: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .btn-read { font-family: var(--font-title); font-weight: 700; font-size: 0.88rem; color: var(--cyan-dark); display: inline-flex; align-items: center; gap: 6px; }
+    .btn-read:hover { color: var(--navy); gap: 10px; }
+
+    /* Footer */
+    footer { background: var(--navy-deep); color: rgba(255,255,255,0.7); padding: 50px 0 30px; font-size: 0.9rem; text-align: center; }
+
+    @media (max-width: 992px) {
+      .articles-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 640px) {
+      .articles-grid { grid-template-columns: 1fr; }
+      .blog-controls { padding: 16px; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog Studio Janaína Portes — Saúde Integrativa & Bem-Estar",
+    "description": "Artigos sobre Fisioterapia, Pilates Clínico, Quiropraxia, Nutrição e Saúde da Mulher.",
+    "url": "https://studio-janaina-portes.vercel.app/blog.html",
+    "publisher": { "@type": "Organization", "name": "Studio Janaína Portes" }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Logo-principal.jpeg" alt="Logo Studio Janaína Portes">
+        <div class="nav-logo-name">Studio Janaína Portes<span>Saúde &amp; Bem-Estar</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#hero">Início</a></li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#servicos">Serviços ▾</a>
+          <div class="dropdown-menu">
+            <a href="pilates-clinico.html">Pilates Clínico &amp; Funcional</a>
+            <a href="fisioterapia-integrativa.html">Fisioterapia Integrativa</a>
+            <a href="quiropraxia.html">Quiropraxia</a>
+            <a href="massagem-relaxante.html">Massagem Relaxante</a>
+            <a href="dancas.html">Danças (Ballet/Jazz)</a>
+            <a href="yoga-terapias.html">Yoga &amp; Terapias Integrativas</a>
+          </div>
+        </li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="index.html#fundadora">Fundadora</a></li>
+        <li><a href="index.html#depoimentos">Avaliações</a></li>
+        <li><a href="index.html#localizacao">Unidades</a></li>
+      </ul>
+      <a href="https://wa.me/5521972891926" target="_blank" class="btn-nav-agendar">Agendar Avaliação</a>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="blog-hero">
+    <div class="container">
+      <span class="blog-badge">Portal de Saúde &amp; Conhecimento</span>
+      <h1 class="blog-title">Blog &amp; Dicas de Saúde Integrativa</h1>
+      <p class="blog-subtitle">Artigos educativos completos, dicas práticas para o dia a dia e colunas clínicas exclusivas das nossas especialistas em Fisioterapia e Pilates no Rio de Janeiro.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Controls Bar -->
+    <div class="blog-controls">
+      <div class="search-box">
+        <span style="font-size:1.2rem;">🔍</span>
+        <input type="text" id="search-input" placeholder="Pesquisar por assunto (ex: coluna, gestante, ansiedade, postura, massagem)..." onkeyup="filterArticles()">
+      </div>
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterTab('all', this)">✨ Todos os Conteúdos</button>
+        <button class="tab-btn" onclick="filterTab('template1', this)">📘 Artigos Educativos</button>
+        <button class="tab-btn" onclick="filterTab('template2', this)">⚡ Dicas de Bem-Estar</button>
+        <button class="tab-btn" onclick="filterTab('template3', this)">🎙️ Coluna dos Especialistas</button>
+        <button class="tab-btn" onclick="filterTab('servico', this)">⭐ Guias de Serviços</button>
+      </div>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="articles-grid" id="articles-container">
+
+      <!-- ITEM 1: Template 1 -->
+      <div class="article-card" data-category="template1" data-keywords="pilates dor lombar hernia de disco coluna fisioterapia">
+        <div class="card-banner" style="background-image:url('Serviços005.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template1">Artigo Educativo</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">👩‍⚕️ Por Dra. Janaína Portes • 7 min de leitura</div>
+          <h3 class="card-title">Pilates Clínico para Dor Lombar e Hérnia de Disco: Como Funciona o Tratamento</h3>
+          <p class="card-excerpt">Descubra a ciência por trás do fortalecimento do core e dos aparelhos no alívio da pressão discal e lombalgia crônica.</p>
+          <div class="card-footer">
+            <a href="pilates-para-dor-lombar-e-hernia-de-disco.html" class="btn-read">Ler Artigo Completo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 2: Template 1 -->
+      <div class="article-card" data-category="template1" data-keywords="dry needling liberacao miofascial dor muscular agulhamento ventosa">
+        <div class="card-banner" style="background-image:url('Serviços002.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template1">Artigo Educativo</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">👩‍⚕️ Por Dra. Larissa Bráz • 6 min de leitura</div>
+          <h3 class="card-title">Dry Needling e Liberação Miofascial: O Guia Definitivo contra Nós de Dor</h3>
+          <p class="card-excerpt">Entenda como o agulhamento a seco desativa pontos-gatilho e desmancha nós musculares no pescoço, ombros e costas.</p>
+          <div class="card-footer">
+            <a href="dry-needling-liberacao-miofascial.html" class="btn-read">Ler Artigo Completo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 3: Template 1 -->
+      <div class="article-card" data-category="template1" data-keywords="quiropraxia dor cervical postura pescoço alinhamento">
+        <div class="card-banner" style="background-image:url('Servicos-Quiropraxia.png');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template1">Artigo Educativo</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">👨‍⚕️ Equipe Quiropraxia • 6 min de leitura</div>
+          <h3 class="card-title">Quiropraxia para Dor Cervical e Correção Postural no Rio de Janeiro</h3>
+          <p class="card-excerpt">Conheça o alinhamento articular preciso para aliviar travamentos, dores de cabeça tensionais e encurtamentos posturais.</p>
+          <div class="card-footer">
+            <a href="quiropraxia-para-dor-cervical-e-postura.html" class="btn-read">Ler Artigo Completo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 4: Template 1 -->
+      <div class="article-card" data-category="template1" data-keywords="pilates gestantes gravidez dor pelvica assoalho pelvico">
+        <div class="card-banner" style="background-image:url('Larissa-Bráz-Pilates-para-Gestantes-liberação-miofascial-ventosaterapia-Dry-Needling..jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template1">Artigo Educativo</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">👩‍⚕️ Por Dra. Larissa Bráz • 8 min de leitura</div>
+          <h3 class="card-title">Pilates para Gestantes: Guia Completo para uma Gravidez Sem Dores</h3>
+          <p class="card-excerpt">Exercícios adaptados para cada trimestre da gestação, fortalecendo a bacia e preparando o corpo para um parto seguro.</p>
+          <div class="card-footer">
+            <a href="pilates-para-gestantes-guia-completo.html" class="btn-read">Ler Artigo Completo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 5: Template 1 -->
+      <div class="article-card" data-category="template1" data-keywords="terapia floral reiki ansiedade estresse emoções bach">
+        <div class="card-banner" style="background-image:url('Servicos-Yoga.png');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template1">Artigo Educativo</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">🌸 Por Dra. Janaína Portes • 7 min de leitura</div>
+          <h3 class="card-title">Reiki e Florais de Bach: Como as Terapias Integrativas Tratam a Ansiedade</h3>
+          <p class="card-excerpt">Compreenda o reequilíbrio energético e as essências de Bach para acalmar mentes aceleradas e resgatar o sono leve.</p>
+          <div class="card-footer">
+            <a href="terapia-floral-reiki-ansiedade.html" class="btn-read">Ler Artigo Completo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 6: Template 2 -->
+      <div class="article-card" data-category="template2" data-keywords="alongamentos pilates postura trabalho escritorio dor nas costas">
+        <div class="card-banner" style="background-image:url('Serviços005.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template2">Dica Rápida</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⚡ Dica de 3 minutos</div>
+          <h3 class="card-title">5 Exercícios de Pilates para Fazer no Trabalho e Salvar Sua Postura</h3>
+          <p class="card-excerpt">Movimentos práticos para fazer na cadeira do escritório e aliviar a tensão nos ombros e coluna durante a rotina.</p>
+          <div class="card-footer">
+            <a href="5-alongamentos-pilates-postura-trabalho.html" class="btn-read">Ler Dica →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 7: Template 2 -->
+      <div class="article-card" data-category="template2" data-keywords="insomnia sono massagem relaxamento estresse cortisol">
+        <div class="card-banner" style="background-image:url('Serviços001.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template2">Dica Rápida</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⚡ Dica de 4 minutos</div>
+          <h3 class="card-title">7 Dicas Práticas para Combater a Insônia e Dormir Melhor com Massagem</h3>
+          <p class="card-excerpt">Aprenda a desacelerar seu sistema nervoso e criar um ritual noturno para um sono profundo e reparador.</p>
+          <div class="card-footer">
+            <a href="7-dicas-para-melhorar-o-sono-massagem.html" class="btn-read">Ler Dica →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 8: Template 2 -->
+      <div class="article-card" data-category="template2" data-keywords="corrida lesoes canelite fasciite fisioterapia esportiva">
+        <div class="card-banner" style="background-image:url('Serviços002.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template2">Dica Rápida</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⚡ Dica de 4 minutos</div>
+          <h3 class="card-title">Como Evitar Lesões na Corrida: 5 Dicas da Fisioterapia Esportiva</h3>
+          <p class="card-excerpt">Orientações valiosas para prevenir canelite, fasciite plantar e síndrome do trato iliotibial em corredores de rua.</p>
+          <div class="card-footer">
+            <a href="como-evitar-lesoes-na-corrida-fisioterapia.html" class="btn-read">Ler Dica →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 9: Template 2 -->
+      <div class="article-card" data-category="template2" data-keywords="ballet adulto dancas flexibilidade iniciantes elegancia">
+        <div class="card-banner" style="background-image:url('Espaço001.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template2">Dica Rápida</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⚡ Dica de 3 minutos</div>
+          <h3 class="card-title">5 Motivos para Começar o Ballet Adulto (Mesmo Sem Nenhuma Experiência)</h3>
+          <p class="card-excerpt">Descubra como a dança desenvolve graciosidade, força nas pernas e postura em um ambiente acolhedor sem pressões.</p>
+          <div class="card-footer">
+            <a href="ballet-adulto-beneficios-iniciantes.html" class="btn-read">Ler Dica →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 10: Template 2 -->
+      <div class="article-card" data-category="template2" data-keywords="respiracao pranayama yoga ansiedade mente calma">
+        <div class="card-banner" style="background-image:url('Servicos-Yoga.png');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template2">Dica Rápida</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⚡ Dica de 3 minutos</div>
+          <h3 class="card-title">3 Técnicas Simples de Respiração do Yoga para Acalmar a Mente</h3>
+          <p class="card-excerpt">Pranayamas rápidos para desacelerar batimentos cardíacos e frear momentos de ansiedade em minutos.</p>
+          <div class="card-footer">
+            <a href="tecnicas-de-respiracao-pranayama-ansiedade.html" class="btn-read">Ler Dica →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 11: Template 3 -->
+      <div class="article-card" data-category="template3" data-keywords="janaina portes fisioterapia 24 anos coluna longevidade">
+        <div class="card-banner" style="background-image:url('Espaço004.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template3">Coluna de Especialista</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">✍️ Dra. Janaína Portes • Fisioterapeuta há 24 anos</div>
+          <h3 class="card-title">O que 24 Anos de Fisioterapia me Ensinaram sobre a Saúde da Coluna</h3>
+          <p class="card-excerpt">Uma reflexão pessoal e clínica sobre o papel do acolhimento, do movimento consciente e do fim dos mitos de repouso.</p>
+          <div class="card-footer">
+            <a href="coluna-janaina-portes-saude-da-coluna-24-anos.html" class="btn-read">Ler Coluna →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 12: Template 3 -->
+      <div class="article-card" data-category="template3" data-keywords="larissa braz gestacao fisioterapia saude da mulher">
+        <div class="card-banner" style="background-image:url('Larissa-Bráz-Pilates-para-Gestantes-liberação-miofascial-ventosaterapia-Dry-Needling..jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template3">Coluna de Especialista</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">✍️ Dra. Larissa Bráz • Saúde da Mulher</div>
+          <h3 class="card-title">Cuidando do Corpo da Mulher: A Importância do Movimento na Gestação</h3>
+          <p class="card-excerpt">Reflexões sobre a preparação da bacia, o cuidado com a relaxina e o fortalecimento consciente do assoalho pélvico.</p>
+          <div class="card-footer">
+            <a href="coluna-larissa-braz-cuidados-na-gestacao.html" class="btn-read">Ler Coluna →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 13: Template 3 -->
+      <div class="article-card" data-category="template3" data-keywords="thatiana martins nutricao integrativa alimentacao antiinflamatoria dor">
+        <div class="card-banner" style="background-image:url('Thatiana-MartinsNutricionita-integrativa-e-Saúde-da-Mulher.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template3">Coluna de Especialista</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">✍️ Dra. Thatiana Martins • Nutricionista Integrativa</div>
+          <h3 class="card-title">Alimentação Anti-inflamatória no Combate às Dores Crônicas no Corpo</h3>
+          <p class="card-excerpt">Como a nutrição atua na modulação da microbiota intestinal e silencia processos inflamatórios articulares.</p>
+          <div class="card-footer">
+            <a href="coluna-thatiana-martins-alimentacao-antiinflamatoria.html" class="btn-read">Ler Coluna →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 14: Template 3 -->
+      <div class="article-card" data-category="template3" data-keywords="janaina portes saude integrativa mente corpo reiki florais">
+        <div class="card-banner" style="background-image:url('Espaço004.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template3">Coluna de Especialista</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">✍️ Dra. Janaína Portes • Fundadora</div>
+          <h3 class="card-title">Por que a Saúde Física e Emocional Precisam ser Tratadas Juntas</h3>
+          <p class="card-excerpt">Entenda a somatização da dor no corpo físico e o alinhamento necessário entre a fisioterapia e as terapias holísticas.</p>
+          <div class="card-footer">
+            <a href="coluna-janaina-portes-terapias-integrativas-mente-corpo.html" class="btn-read">Ler Coluna →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 15: Template 3 -->
+      <div class="article-card" data-category="template3" data-keywords="larissa braz liberacao miofascial recovery atletas musculo">
+        <div class="card-banner" style="background-image:url('Larissa-Bráz-Pilates-para-Gestantes-liberação-miofascial-ventosaterapia-Dry-Needling..jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-template3">Coluna de Especialista</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">✍️ Dra. Larissa Bráz • Fisioterapeuta</div>
+          <h3 class="card-title">Como a Liberação Miofascial Restaura o Corpo de Quem Pratica Esportes</h3>
+          <p class="card-excerpt">A relevância da fáscia muscular na amplitude de movimento, prevenção de rigidez e aceleração do recovery pós-treino.</p>
+          <div class="card-footer">
+            <a href="coluna-larissa-braz-liberacao-miofascial-atletas.html" class="btn-read">Ler Coluna →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 16: Guia de Serviço - Pilates -->
+      <div class="article-card" data-category="servico" data-keywords="pilates clinico funcional reformer cadillac chair meier barra">
+        <div class="card-banner" style="background-image:url('Serviços005.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-servico">Guia do Serviço</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⭐ Serviço Especializado</div>
+          <h3 class="card-title">Pilates Clínico &amp; Funcional: Aparelhos e Solo de Alta Performance</h3>
+          <p class="card-excerpt">Saiba tudo sobre nossas aulas supervisionadas por fisioterapeutas no Méier e na Barra da Tijuca.</p>
+          <div class="card-footer">
+            <a href="pilates-clinico.html" class="btn-read">Ver Guia →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 17: Guia de Serviço - Fisioterapia -->
+      <div class="article-card" data-category="servico" data-keywords="fisioterapia integrativa pos operatorio reabilitacao dor meier barra">
+        <div class="card-banner" style="background-image:url('Serviços002.jpg');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-servico">Guia do Serviço</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⭐ Serviço Especializado</div>
+          <h3 class="card-title">Fisioterapia Integrativa: Ciência e Cuidado para a Causa Raiz da Dor</h3>
+          <p class="card-excerpt">Reabilitação pós-operatória, tratamento de tendinites, bursites e lesões articulares.</p>
+          <div class="card-footer">
+            <a href="fisioterapia-integrativa.html" class="btn-read">Ver Guia →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 18: Guia de Serviço - Quiropraxia -->
+      <div class="article-card" data-category="servico" data-keywords="quiropraxia alinhamento coluna estalo articulação meier barra">
+        <div class="card-banner" style="background-image:url('Servicos-Quiropraxia.png');">
+          <div class="card-banner-overlay"></div>
+          <span class="card-tag tag-servico">Guia do Serviço</span>
+        </div>
+        <div class="card-content">
+          <div class="card-author">⭐ Serviço Especializado</div>
+          <h3 class="card-title">Quiropraxia: Alinhamento da Coluna e Desbloqueio Articular</h3>
+          <p class="card-excerpt">Ajustes manuais precisos para aliviar dores ciáticas, nervos prensados e desvio postural.</p>
+          <div class="card-footer">
+            <a href="quiropraxia.html" class="btn-read">Ver Guia →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Studio Janaína Portes — Saúde Integrativa &amp; Bem-Estar no Rio de Janeiro.</p>
+    </div>
+  </footer>
+
+  <script>
+    function filterTab(category, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.article-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterArticles() {
+      const query = document.getElementById('search-input').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.article-card');
+
+      cards.forEach(card => {
+        const text = (card.innerText + ' ' + card.getAttribute('data-keywords')).toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
