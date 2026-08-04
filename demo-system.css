@@ -1,0 +1,453 @@
+/* ==================================================
+   SISTEMA NATIVO DE DEMONSTRAÇÃO E EXPIRAÇÃO AUTOMÁTICA
+   Studio Janaína Portes — Desenvolvido por Douglas Kalk
+   ================================================== */
+
+/* ----- BADGE FLUTUANTE ----- */
+.demo-badge {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99990;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #ffffff;
+  font-size: 0.82rem;
+  animation: demoBadgeFadeIn 0.5s ease-out;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.demo-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 194, 203, 0.3);
+}
+
+.demo-badge-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.demo-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #00C2CB;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.demo-badge-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.demo-badge-time span {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.demo-badge-btn {
+  background: linear-gradient(135deg, #00C2CB 0%, #00B5CC 100%);
+  color: #132039;
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 7px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 194, 203, 0.3);
+}
+
+.demo-badge-btn:hover {
+  background: linear-gradient(135deg, #F3C010 0%, #E8B80D 100%);
+  color: #162846;
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(243, 192, 16, 0.4);
+}
+
+/* ----- POPUP INTERCOM ----- */
+.demo-popup {
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  width: 350px;
+  max-width: calc(100vw - 40px);
+  z-index: 99995;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 24px 50px -10px rgba(19, 32, 57, 0.3), 0 0 0 1px rgba(19, 32, 57, 0.08);
+  padding: 22px;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  animation: demoPopupSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.demo-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.demo-popup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 194, 203, 0.12);
+  color: #008B94;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.demo-popup-close {
+  background: transparent;
+  border: none;
+  color: #64748B;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.demo-popup-close:hover {
+  background: #F1F5F9;
+  color: #1E293B;
+}
+
+.demo-popup-body {
+  font-size: 0.88rem;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.demo-popup-body p {
+  margin: 0 0 8px 0;
+}
+
+.demo-popup-body p:last-child {
+  margin-bottom: 0;
+}
+
+.demo-popup-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.demo-popup-btn-primary {
+  flex: 1;
+  background: #162846;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.demo-popup-btn-primary:hover {
+  background: #00C2CB;
+  color: #132039;
+}
+
+.demo-popup-btn-secondary {
+  background: #F1F5F9;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-popup-btn-secondary:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+}
+
+/* ----- PÓS-EXPIRAÇÃO: OVERLAY & GLASSMORPHISM ----- */
+.demo-expired-blur {
+  filter: blur(4px) brightness(82%) !important;
+  backdrop-filter: blur(4px) brightness(82%) !important;
+  -webkit-backdrop-filter: blur(4px) brightness(82%) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+.demo-expired-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(13, 22, 40, 0.38);
+  backdrop-filter: blur(14px) brightness(72%);
+  -webkit-backdrop-filter: blur(14px) brightness(72%);
+  overflow-y: auto;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.demo-expired-card {
+  max-width: 900px;
+  width: 94%;
+  max-height: calc(100vh - 40px);
+  box-sizing: border-box;
+  margin: auto;
+  background: linear-gradient(145deg, rgba(22, 40, 70, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 194, 203, 0.4);
+  border-radius: 28px;
+  padding: 38px 50px;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 50px rgba(0, 194, 203, 0.15);
+  animation: demoCardFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 194, 203, 0.4) transparent;
+}
+
+.demo-expired-title {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.95rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFFFFF 0%, #00C2CB 65%, #F3C010 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 18px 0;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.demo-expired-body {
+  font-size: 0.98rem;
+  color: rgba(241, 245, 249, 0.95);
+  line-height: 1.62;
+}
+
+.demo-expired-body p {
+  margin: 0 0 12px 0;
+}
+
+.demo-expired-body p:last-child {
+  margin-bottom: 0;
+}
+
+.demo-expired-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 194, 203, 0.35), transparent);
+  margin: 20px 0;
+  border: none;
+}
+
+/* Contact Block */
+.demo-expired-contact-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  padding: 16px 24px;
+  margin-bottom: 18px;
+}
+
+.demo-expired-author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-expired-author-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.demo-expired-author-role {
+  font-size: 0.88rem;
+  color: #00C2CB;
+  font-weight: 600;
+}
+
+.demo-expired-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.demo-btn-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 11px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.demo-btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  color: #ffffff;
+}
+
+.demo-btn-instagram {
+  background: rgba(225, 48, 108, 0.2);
+  color: #FF85AD;
+  border: 1px solid rgba(225, 48, 108, 0.5);
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 11px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.demo-btn-instagram:hover {
+  background: rgba(225, 48, 108, 0.35);
+  border-color: #E1306C;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Footer Quote Box */
+.demo-expired-quote-box {
+  background: rgba(243, 192, 16, 0.12);
+  border: 1px solid rgba(243, 192, 16, 0.4);
+  border-radius: 16px;
+  padding: 16px 24px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.demo-expired-quote {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #FFE600;
+  line-height: 1.45;
+  margin: 0;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Animations */
+@keyframes demoBadgeFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes demoPopupSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes demoCardFadeUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .demo-expired-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .demo-expired-title {
+    font-size: 1.45rem;
+  }
+
+  .demo-expired-body {
+    font-size: 0.88rem;
+  }
+
+  .demo-expired-contact-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .demo-badge {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    justify-content: space-between;
+  }
+
+  .demo-popup {
+    bottom: 75px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+
+  .demo-expired-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .demo-btn-whatsapp, .demo-btn-instagram {
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+

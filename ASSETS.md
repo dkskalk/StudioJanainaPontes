@@ -46,7 +46,7 @@
 
 | Arquivo | Nome | Especialidades | Uso |
 |---|---|---|---|
-| `Janaina-Pontes-fisioterapeuta-há-24-anos-especialização-em Pilates-pós-graduação-em fisioterapia-na-saúde-da-mulher. Além-disso-reikiana, terapeuta-floral-e-terapeuta-integrativa..jpg` | **Janaína Portes** | Fisioterapeuta (24 anos), Pilates, Saúde da Mulher, Reiki, Terapia Floral, Integrativa | Seção "Sobre a Fundadora" — foto editorial principal |
+| `Janaina-Portes-fisioterapeuta-há-24-anos-especialização-em Pilates-pós-graduação-em fisioterapia-na-saúde-da-mulher. Além-disso-reikiana, terapeuta-floral-e-terapeuta-integrativa..jpg` | **Janaína Portes** | Fisioterapeuta (24 anos), Pilates, Saúde da Mulher, Reiki, Terapia Floral, Integrativa | Seção "Sobre a Fundadora" — foto editorial principal |
 | `Larissa-Bráz-Pilates-para-Gestantes-liberação-miofascial-ventosaterapia-Dry-Needling..jpg` | **Larissa Bráz** | Fisioterapeuta, Pilates Gestantes, Liberação Miofascial, Ventosaterapia, Dry Needling | Seção Equipe |
 | `Thatiana-MartinsNutricionita-integrativa-e-Saúde-da-Mulher.jpg` | **Thatiana Martins** | Nutricionista Integrativa, Saúde da Mulher | Seção Equipe |
 
@@ -65,7 +65,7 @@
 | **Serviços — Danças** | `Espaço001.jpg` |
 | **Serviços — Yoga** | *(placeholder gerado)* |
 | **Seletor de Unidades** | Sem foto (design gráfico) |
-| **Sobre a Fundadora** | `Janaina-Pontes-...jpg`, `Espaço004.jpg` |
+| **Sobre a Fundadora** | `Janaina-Portes-...jpg`, `Espaço004.jpg` |
 | **Equipe** | `Larissa-Bráz-...jpg`, `Thatiana-Martins...jpg` |
 | **Galeria** | `Espaço001.jpg`, `Espaço002.jpg`, `Espaço003.jpg`, `Espaço004.jpg`, `Serviços002.jpg`, `Serviços003.jpg` |
 | **Footer** | `Logo-principal.jpeg` |
